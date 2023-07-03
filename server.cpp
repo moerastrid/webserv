@@ -1,7 +1,7 @@
 #include <sys/socket.h>
 #include <iostream>
 #include <string>
-#include <cstdio>
+#include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <netinet/in.h>
@@ -10,7 +10,7 @@ using namespace std;
 
 int main() {
 	close(3);
-	int fd = socket(PF_LOCAL, SOCK_STREAM, 0);
+	int fd = socket(PF_INET, SOCK_STREAM, 0);
 	if (fd == -1) {
 		cerr << "cannot open socket" << endl;
 		return 1;
@@ -31,12 +31,6 @@ int main() {
 	address.sin_family = PF_INET;
 	address.sin_addr.s_addr = INADDR_ANY;
 	address.sin_port = htons(8080);
-
-	// if (bind(fd, ((const sockaddr *)&address), sizeof(address)) < 0) {
-	// 	std::cerr << "Cannot bind socket" << std::endl;
-	// 	return 1;
-	// } else
-	// 	std::cout << "socket " << fd << " bind success" << std::endl;
 
 	int val = bind(fd, sendr, addrlen);
 	if (val < 0) {

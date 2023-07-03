@@ -10,7 +10,7 @@
 using namespace std;
 
 int main() {
-	int fd = socket(PF_LOCAL, SOCK_STREAM, 0);
+	int fd = socket(PF_INET, SOCK_STREAM, 0);
 	if (fd == -1) {
 		cerr << "cannot open socket" << endl;
 		return 1;
@@ -19,9 +19,9 @@ int main() {
 	struct sockaddr_in address;
 	struct sockaddr *sendr = (struct sockaddr *)&address;
 
-	address.sin_family = AF_INET;
-    address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_port = htons(8080);
+	address.sin_family = PF_INET;
+	address.sin_addr.s_addr = INADDR_ANY;
+	address.sin_port = htons(8080);
 
 	connect(fd, sendr, sizeof(address));
 
