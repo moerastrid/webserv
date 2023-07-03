@@ -1,0 +1,41 @@
+name: build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    # strategy to run on mac and linux
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+    - uses: actions/checkout@v3
+    - name: Configure CMake
+      # Configure CMake in a 'build' subdirectory.
+      run: cmake -B ${{github.workspace}}/build
+    - name: Build
+      # Build your program with the given configuration
+      run: cmake --build ${{github.workspace}}/build
+
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+    - uses: actions/checkout@v3
+    - name: Configure CMake
+      # Configure CMake in a 'build' subdirectory.
+      run: cmake -B ${{github.workspace}}/build -DBUILD_TESTS=yes -DCMAKE_BUILD_TYPE=Debug
+    - name: Build
+      # Build your program with the given configuration
+      run: cmake --build ${{github.workspace}}/build
+    - name: Test
+      run: ctest --output-on-failure --test-dir ${{github.workspace}}/build
