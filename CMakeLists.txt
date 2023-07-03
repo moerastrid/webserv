@@ -8,7 +8,7 @@ set (SRCS_MAIN
 )
 
 set (SRCS
-    src/hello-world.cpp
+	src/Socket.cpp
 )
 set (EXEC_NAME webserv)
 
