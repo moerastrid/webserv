@@ -4,40 +4,24 @@
 
 #include <stdexcept>
 
-#include <iostream>
+Connection::Connection() : FileDescriptor() {}
 
-Connection::Connection(int connection_fd) : _connection_fd(connection_fd) {
-	
-	std::cout << "Connection constructor with connection_fd: " << connection_fd << std::endl;
-	if (_connection_fd < 0) {
-		throw std::runtime_error("Invalid connection fd");
-	}
-}
+Connection::Connection(int connection_fd) : FileDescriptor(connection_fd) {}
 
-Connection::~Connection() {
-	std::cout << "Connection destructor with connection_fd: " << _connection_fd << std::endl;
-	if (_connection_fd < 0)
-		return;
-	::close(_connection_fd);
-}
+Connection::~Connection() {}
 
-void Connection::close() {
-	std::cout << "Connection close with connection_fd: " << _connection_fd << std::endl;
-	if (_connection_fd < 0) {
-		return;
-	}
-	if (::close(_connection_fd) < 0) {
-		throw std::runtime_error("Failed to close connection");
-	}
-	_connection_fd = -1;
+// TODO Implement stream
+std::string Connection::read(std::size_t length) {
+    char buffer[length];
+    ssize_t bytes_read = ::read(this->getFD(), buffer, sizeof(buffer));
+    if (bytes_read < 0) {
+        throw std::runtime_error("Failed to read from connection");
+    }
+    return std::string(buffer, bytes_read);
 }
 
 void Connection::write(const std::string &data) {
-	std::cout << "Connection write with connection_fd: " << _connection_fd << std::endl;
-	if (_connection_fd < 0) {
-		throw std::runtime_error("Invalid connection fd");
-	}
-	if (::write(_connection_fd, data.c_str(), data.size()) < 0) {
-		throw std::runtime_error("Failed to write to connection");
-	}
+    if (::write(this->getFD(), data.c_str(), data.size()) < 0) {
+        throw std::runtime_error("Failed to write to connection");
+    }
 }

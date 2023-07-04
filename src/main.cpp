@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-#include "Socket.hpp"
 #include "Connection.hpp"
+#include "Socket.hpp"
 
 int main() {
     Socket socket(53433);
@@ -15,13 +15,19 @@ int main() {
         Connection connection = socket.accept();
         std::cout << "Accepted connection" << std::endl;
 
+        std::cout << "Writing to connection" << std::endl;
         connection.write("Hello, world!\n");
 
+        std::cout << "Reading from connection" << std::endl;
+        std::string data = connection.read(1024);
+        std::cout << data;
+        if (*(data.end() - 1) != '\n') {
+            std::cout << std::endl;
+        }
         connection.close();
         std::cout << "Closed connection" << std::endl;
     }
 
-    // optional
     socket.close();
     std::cout << "Closed socket" << std::endl;
     return 0;
