@@ -3,21 +3,21 @@
 #include <iostream>
 
 #include "Socket.hpp"
+#include "Connection.hpp"
 
 int main() {
-    Socket socket(80);
+    Socket socket(53433);
 
     while (1) {
         if (!socket.pending())
             continue;
         std::cout << "Pending socket" << std::endl;
-        int client_fd = socket.accept();
+        Connection connection = socket.accept();
         std::cout << "Accepted connection" << std::endl;
 
-        if (close(client_fd) < 0) {
-            std::cerr << "Failed to close client socket" << std::endl;
-            return 1;
-        }
+        connection.write("Hello, world!\n");
+
+        connection.close();
         std::cout << "Closed connection" << std::endl;
     }
 

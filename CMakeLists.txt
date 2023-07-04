@@ -9,6 +9,7 @@ set (SRCS_MAIN
 
 set (SRCS
 	src/Socket.cpp
+	src/Connection.cpp
 )
 set (EXEC_NAME webserv)
 

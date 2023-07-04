@@ -13,23 +13,13 @@ Socket::Socket(int port, int backlog) {
     _listen(backlog);
 }
 
-Socket::Socket(const Socket &other) {
-    *this = other;
-}
-
 Socket::~Socket() {
-    close();
+    if (_socket_fd >= 0) {
+        ::close(_socket_fd);
+    }
 }
 
-Socket &Socket::operator=(const Socket &other) {
-    if (this == &other)
-        return *this;
-    close();
-    _socket_fd = _dup(other._socket_fd);
-    return *this;
-}
-
-int Socket::accept() {
+Connection Socket::accept() {
     int client_fd = ::accept(_socket_fd, NULL, NULL);
     if (client_fd < 0) {
         throw std::runtime_error("Failed to accept connection");
@@ -44,7 +34,7 @@ bool Socket::pending() const {
     fds[0].fd = _socket_fd;
     fds[0].events = POLLIN;
 
-    return poll(fds, fd_count, 0) > 0;
+    return (poll(fds, fd_count, 0) > 0);
 }
 
 void Socket::_socket() {
@@ -76,22 +66,8 @@ void Socket::close() {
     if (_socket_fd < 0) {
         return;
     }
-    _close(_socket_fd);
-    _socket_fd = -1;
-}
-
-// Protected c function as a static private method
-
-int Socket::_dup(int fd) {
-    int new_fd = dup(fd);
-    if (new_fd < 0) {
-        throw std::runtime_error("Failed to duplicate file descriptor");
-    }
-    return new_fd;
-}
-
-void Socket::_close(int fd) {
-    if (::close(fd) < 0) {
+    if (::close(_socket_fd) < 0) {
         throw std::runtime_error("Failed to close file descriptor");
     }
+    _socket_fd = -1;
 }
