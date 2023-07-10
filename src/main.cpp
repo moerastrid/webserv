@@ -1,10 +1,12 @@
-#include <iostream>
+#include "webserv.hpp"
 
 #include "hello-world.hpp"
 #include "Config.hpp"
 
-int main()
+int main(int argc, char **argv)
 {
+	Config config;
+
 	std::cout << hello_world() << std::endl;
 	try {
 		parse(argc, argv, config);
