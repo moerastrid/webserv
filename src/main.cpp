@@ -1,9 +1,10 @@
-#include <iostream>
+#include "webserv.hpp"
 
-#include "hello-world.hpp"
-
-int main()
+int main(int argc, char **argv)
 {
-	std::cout << hello_world() << std::endl;
+	Config	config;
+	(void)argc;
+	(void)argv;
+	std::cout << "parse result : " << config << std::endl;
 	return 0;
 }
