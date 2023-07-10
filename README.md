@@ -1,6 +1,28 @@
 # **webserv**
 Codam / 42 webserv project
 
+## Compiling and running
+### Dependencies
+- C++ compiler (clang++ or g++) with C++20 support
+- CMake 3.21 or higher
+
+### Compilation steps
+- create build folder `mkdir build && cd build`
+- generate build files `cmake ..`
+- compile project `cmake --build .` or `make`
+
+### Run project
+- run project `./webserv [config_file]`
+
+### Run tests
+- generate build files with tests `cmake -DBUILD_TESTS=y ..`
+- compile project `cmake --build .` or `make`
+- run tests `ctest`
+
+### Compile debug build (address sanitizer)
+- generate build files with AddressSanitizer `cmake -DCMAKE_BUILD_TYPE=Debug`
+- compile project `cmake --build .` or `make`
+
 ## Development
 ### Autoformat vscode
 
