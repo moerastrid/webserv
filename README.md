@@ -1,4 +1,4 @@
-# webserv
+# **webserv**
 Codam / 42 webserv project
 
 ## Development
@@ -18,3 +18,7 @@ Use the following key combinations to format the file:
 Steps to prepare vscode for better C++ syntax highlighting:
 - Install vscode extension: C/C++ IntelliSense (`ms-vscode.cpptools`)
 - Copy `.vscode/c_cpp_properties.json.default` to `.vscode/c_cpp_properties.json` (this will apply the default settings for this project)
+
+
+## **config file**
+To configure webserv, use the [configuration file](CONFIG.md).
