@@ -1,7 +1,8 @@
-set(TEST_EXECUTABLE_NAME minirt_unit_tests)
+set(TEST_EXECUTABLE_NAME webserv_unit_tests)
 
 set(TEST_SRCS
 	test.cpp
+	test_parse_header.cpp
 )
 
 # Download GoogleTest
@@ -40,5 +41,5 @@ target_link_libraries(
 # Add tests to CTest
 # Set working directory to the the testing folder so that the test can find their test files
 # --------------------------------------------------
-gtest_discover_tests(${TEST_EXECUTABLE_NAME} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TEST_PREFIX "miniRT/")
+gtest_discover_tests(${TEST_EXECUTABLE_NAME} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 enable_testing()

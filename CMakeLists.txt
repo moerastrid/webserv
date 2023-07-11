@@ -11,6 +11,7 @@ set (SRCS
 	src/hello-world.cpp
     src/Config.cpp
 	src/errorMessage.cpp
+	src/parse_headers/parse_headers.cpp
 )
 set (EXEC_NAME webserv)
 
