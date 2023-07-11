@@ -20,7 +20,7 @@ Codam / 42 webserv project
 - run tests `ctest`
 
 ### Compile debug build (address sanitizer)
-- generate build files with AddressSanitizer `cmake -DCMAKE_BUILD_TYPE=Debug`
+- generate build files with AddressSanitizer `cmake -DCMAKE_BUILD_TYPE=Debug ..`
 - compile project `cmake --build .` or `make`
 
 ## Development
