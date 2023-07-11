@@ -49,13 +49,12 @@ std::unordered_map<std::string, std::string> parse_headers(const std::string mes
 	header_map.emplace("METHOD_PAGE_PROTOCOL", first);
 
 	for (std::string const & line : lines) {
-		std::cout << "line: [" << line << "]" << std::endl;
 		if(line.empty())
 			continue;
-		std::cout << "empty line: [" << line << "]" << std::endl;
 		std::vector<std::string> header = ws_split_on_colon(line);
 		std::string head = header.front();
 		std::string body = header.back();
+		// if(!head.empty() && !body.empty()) //Either, both or neither??
 		merge_or_insert(header_map, head, body);
 	}
 	return header_map;
