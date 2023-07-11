@@ -25,6 +25,9 @@ set (CMAKE_EXPORT_COMPILE_COMMANDS ON) #vscode include path checking
 add_executable(${EXEC_NAME} ${SRCS} ${SRCS_MAIN})
 target_include_directories(${EXEC_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+add_subdirectory(lib/cpplog)
+target_link_libraries(${EXEC_NAME} cpplog)
+
 #-------------------- TESTING -------------------------------
 
 if ((PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME AND BUILD_TESTS) OR WEBSERV_BUILD_TESTS)

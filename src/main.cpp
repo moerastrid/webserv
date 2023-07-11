@@ -1,10 +1,13 @@
 #include "webserv.hpp"
 
-int main(int argc, char **argv)
+#include <iostream>
+
+#include <cpplog.hpp>
+
+CPPLog logger(CPPLog::INFO);
+
+int main(void)
 {
-	Config	config;
-	(void)argc;
-	(void)argv;
-	std::cout << "parse result : " << config << std::endl;
-	return 0;
+	logger.log(CPPLog::DEBUG, "Parsing config file...");
+	logger.logInfo("Launching server...");
 }
