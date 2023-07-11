@@ -31,8 +31,8 @@ struct LocationConfig {
 };
 
 struct ServerConfig {
-	unsigned int						port = 0;
-	std::string							host = "default_server";
+	std::deque<unsigned int>			port = 0;
+	std::deque<std::string>				host = "default_server";
 	std::deque<std::string>				server_names = {"default.org", "www.default.org"};
 	double								client_max_body_size = 1000000; // nginx default = 1m
 	std::map<ERRORPAGE, std::string>	error_path = {{ERROR400, "error400.html"}, {ERROR404, "error404.html"}};
@@ -40,6 +40,7 @@ struct ServerConfig {
 };
 
 struct Config {
+	std::string					config_file = "config/webserv.conf";
 	std::deque<ServerConfig>	servers = {ServerConfig()};
 };
 

@@ -25,7 +25,7 @@ std::ostream &operator<<(std::ostream &o, ServerConfig const &sercon) {
 std::ostream &operator<<(std::ostream &o, Config const &con) {
 	std::deque<ServerConfig>::const_iterator	temp;
 	for (const ServerConfig &server : con.servers) {
-		o << "CONFIG: " << server;
+		o << "CONFIG " << con.config_file << " - " << server;
 	}
 	return (o);
 }

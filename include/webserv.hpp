@@ -9,3 +9,4 @@
 // function prototypes
 int		parse(int argc, char **argv, Config &config);
 void	errorMessage(std::string str);
+void	warningMessage(std::string	str);
